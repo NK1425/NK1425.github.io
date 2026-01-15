@@ -152,6 +152,31 @@
         .edu-content h3 { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; margin-bottom: 10px; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .edu-content p { color: var(--text-secondary); margin-bottom: 5px; }
         .edu-date { color: var(--neon-magenta); font-size: 0.9rem; letter-spacing: 2px; }
+        .certifications { background: linear-gradient(180deg, var(--dark-bg) 0%, var(--darker-bg) 100%); }
+        .certifications-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .cert-bundle { background: var(--card-bg); border: 1px solid rgba(0, 245, 255, 0.15); border-radius: 12px; overflow: hidden; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; position: relative; }
+        .cert-bundle::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gradient-1); transform: scaleX(0); transform-origin: left; transition: transform 0.5s ease; }
+        .cert-bundle:hover::before { transform: scaleX(1); }
+        .cert-bundle:hover { border-color: var(--neon-cyan); box-shadow: 0 10px 40px rgba(0, 245, 255, 0.2), 0 0 0 1px rgba(0, 245, 255, 0.1); transform: translateY(-4px); }
+        .cert-bundle.active { border-color: var(--neon-cyan); box-shadow: 0 15px 50px rgba(0, 245, 255, 0.3), 0 0 0 1px rgba(0, 245, 255, 0.2); }
+        .cert-header { padding: 25px 30px; display: flex; align-items: center; justify-content: space-between; transition: all 0.3s ease; }
+        .cert-bundle:hover .cert-header { padding-bottom: 20px; }
+        .cert-bundle.active .cert-header { padding-bottom: 20px; border-bottom: 1px solid rgba(0, 245, 255, 0.1); }
+        .cert-header-left { display: flex; align-items: center; gap: 20px; flex: 1; }
+        .cert-icon-compact { width: 50px; height: 50px; background: var(--gradient-1); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+        .cert-title-compact { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text-primary); line-height: 1.3; }
+        .cert-issuer-compact { font-size: 0.85rem; color: var(--neon-cyan); margin-top: 4px; }
+        .cert-expand-icon { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; color: var(--neon-cyan); transition: transform 0.3s ease; flex-shrink: 0; }
+        .cert-bundle.active .cert-expand-icon { transform: rotate(180deg); }
+        .cert-expand-icon svg { width: 20px; height: 20px; fill: currentColor; }
+        .cert-details { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s ease, opacity 0.3s ease; opacity: 0; }
+        .cert-bundle.active .cert-details { max-height: 500px; opacity: 1; padding: 0 30px 25px; }
+        .cert-details-content { padding-top: 20px; }
+        .cert-description { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 15px; }
+        .cert-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 15px; }
+        .cert-badge { display: inline-flex; align-items: center; padding: 6px 14px; background: rgba(0, 245, 255, 0.1); border: 1px solid rgba(0, 245, 255, 0.3); border-radius: 6px; font-size: 0.7rem; color: var(--neon-cyan); letter-spacing: 0.5px; font-weight: 500; }
+        .cert-date-badge { display: inline-flex; align-items: center; padding: 6px 14px; background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 6px; font-size: 0.7rem; color: var(--neon-purple); letter-spacing: 0.5px; }
+        .cert-divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.3), transparent); margin: 15px 0; }
         .contact { text-align: center; position: relative; }
         .contact::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(255, 0, 255, 0.1) 0%, transparent 70%); border-radius: 50%; filter: blur(80px); }
         .contact-content { position: relative; z-index: 10; }
@@ -184,6 +209,9 @@
             .timeline-item::before, .timeline-item:nth-child(even)::before { left: 10px; right: auto; }
             .edu-card { flex-direction: column; text-align: center; }
             .skills-grid { grid-template-columns: 1fr; }
+            .certifications-grid { grid-template-columns: 1fr; gap: 15px; }
+            .cert-header { padding: 20px 25px; }
+            .cert-bundle.active .cert-details { padding: 0 25px 20px; }
             .contact-links { flex-direction: column; align-items: center; }
             .projects-grid { grid-template-columns: 1fr; }
         }
@@ -200,6 +228,7 @@
         <a href="#skills" onclick="closeMenu()">Skills</a>
         <a href="#experience" onclick="closeMenu()">Experience</a>
         <a href="#projects" onclick="closeMenu()">Projects</a>
+        <a href="#certifications" onclick="closeMenu()">Certifications</a>
         <a href="#contact" onclick="closeMenu()">Contact</a>
     </div>
     <nav>
@@ -209,6 +238,7 @@
             <li><a href="#skills">Skills</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#projects">Projects</a></li>
+            <li><a href="#certifications">Certifications</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
@@ -337,6 +367,237 @@
         <div class="edu-card"><div class="edu-icon">🎓</div><div class="edu-content"><h3>Master of Science in Computer Science</h3><p>University of Memphis, Memphis, Tennessee</p><span class="edu-date">Graduated May 2024</span></div></div>
     </section>
 
+    <section class="certifications" id="certifications">
+        <div class="section-header"><span class="section-tag">// Professional Credentials</span><h2 class="section-title">Certifications</h2></div>
+        <div class="certifications-grid">
+            <div class="cert-bundle" onclick="toggleCert(this)">
+                <div class="cert-header">
+                    <div class="cert-header-left">
+                        <div class="cert-icon-compact">☁️</div>
+                        <div>
+                            <div class="cert-title-compact">AWS Certified Machine Learning - Specialty</div>
+                            <div class="cert-issuer-compact">Amazon Web Services (AWS)</div>
+                        </div>
+                    </div>
+                    <div class="cert-expand-icon">
+                        <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                    </div>
+                </div>
+                <div class="cert-details">
+                    <div class="cert-details-content">
+                        <div class="cert-divider"></div>
+                        <p class="cert-description">Demonstrates ability to design, implement, deploy, and maintain machine learning solutions on AWS. Validates expertise in SageMaker, data engineering, model training, hyperparameter tuning, and production ML systems.</p>
+                        <div class="cert-meta">
+                            <span class="cert-badge">Cloud ML</span>
+                            <span class="cert-badge">AWS SageMaker</span>
+                            <span class="cert-date-badge">ML Specialty</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cert-bundle" onclick="toggleCert(this)">
+                <div class="cert-header">
+                    <div class="cert-header-left">
+                        <div class="cert-icon-compact">🤖</div>
+                        <div>
+                            <div class="cert-title-compact">Azure AI Engineer Associate</div>
+                            <div class="cert-issuer-compact">Microsoft Azure</div>
+                        </div>
+                    </div>
+                    <div class="cert-expand-icon">
+                        <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                    </div>
+                </div>
+                <div class="cert-details">
+                    <div class="cert-details-content">
+                        <div class="cert-divider"></div>
+                        <p class="cert-description">Validates skills in building, managing, and deploying AI solutions using Azure Cognitive Services, Azure Applied AI services, and Azure Bot Framework. Covers natural language processing, computer vision, and conversational AI.</p>
+                        <div class="cert-meta">
+                            <span class="cert-badge">Azure AI</span>
+                            <span class="cert-badge">Cognitive Services</span>
+                            <span class="cert-date-badge">AI Engineering</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cert-bundle" onclick="toggleCert(this)">
+                <div class="cert-header">
+                    <div class="cert-header-left">
+                        <div class="cert-icon-compact">📊</div>
+                        <div>
+                            <div class="cert-title-compact">Azure Data Scientist Associate</div>
+                            <div class="cert-issuer-compact">Microsoft Azure</div>
+                        </div>
+                    </div>
+                    <div class="cert-expand-icon">
+                        <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                    </div>
+                </div>
+                <div class="cert-details">
+                    <div class="cert-details-content">
+                        <div class="cert-divider"></div>
+                        <p class="cert-description">Proven expertise in applying data science and machine learning to implement and run ML workloads on Azure. Covers Azure Machine Learning, data preparation, model training, deployment, and MLOps practices.</p>
+                        <div class="cert-meta">
+                            <span class="cert-badge">Data Science</span>
+                            <span class="cert-badge">Azure ML</span>
+                            <span class="cert-date-badge">ML Workloads</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cert-bundle" onclick="toggleCert(this)">
+                <div class="cert-header">
+                    <div class="cert-header-left">
+                        <div class="cert-icon-compact">🔷</div>
+                        <div>
+                            <div class="cert-title-compact">Databricks Certified Machine Learning Associate</div>
+                            <div class="cert-issuer-compact">Databricks</div>
+                        </div>
+                    </div>
+                    <div class="cert-expand-icon">
+                        <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                    </div>
+                </div>
+                <div class="cert-details">
+                    <div class="cert-details-content">
+                        <div class="cert-divider"></div>
+                        <p class="cert-description">Validates knowledge of MLflow, model training, feature engineering, and production ML workflows on Databricks. Demonstrates proficiency in distributed ML, model registry, and automated ML pipelines.</p>
+                        <div class="cert-meta">
+                            <span class="cert-badge">MLOps</span>
+                            <span class="cert-badge">MLflow</span>
+                            <span class="cert-date-badge">Production ML</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cert-bundle" onclick="toggleCert(this)">
+                <div class="cert-header">
+                    <div class="cert-header-left">
+                        <div class="cert-icon-compact">🧠</div>
+                        <div>
+                            <div class="cert-title-compact">TensorFlow Developer Certificate</div>
+                            <div class="cert-issuer-compact">TensorFlow / Google</div>
+                        </div>
+                    </div>
+                    <div class="cert-expand-icon">
+                        <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                    </div>
+                </div>
+                <div class="cert-details">
+                    <div class="cert-details-content">
+                        <div class="cert-divider"></div>
+                        <p class="cert-description">Demonstrates proficiency in building and training neural network models using TensorFlow for production-ready ML applications. Covers CNNs, RNNs, NLP, computer vision, and model optimization techniques.</p>
+                        <div class="cert-meta">
+                            <span class="cert-badge">Deep Learning</span>
+                            <span class="cert-badge">TensorFlow</span>
+                            <span class="cert-date-badge">Neural Networks</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cert-bundle" onclick="toggleCert(this)">
+                <div class="cert-header">
+                    <div class="cert-header-left">
+                        <div class="cert-icon-compact">☁️</div>
+                        <div>
+                            <div class="cert-title-compact">Google Cloud Professional ML Engineer</div>
+                            <div class="cert-issuer-compact">Google Cloud Platform</div>
+                        </div>
+                    </div>
+                    <div class="cert-expand-icon">
+                        <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                    </div>
+                </div>
+                <div class="cert-details">
+                    <div class="cert-details-content">
+                        <div class="cert-divider"></div>
+                        <p class="cert-description">Validates ability to design, build, and productionize ML models to solve business challenges using Google Cloud technologies. Covers Vertex AI, AutoML, BigQuery ML, and end-to-end ML pipelines.</p>
+                        <div class="cert-meta">
+                            <span class="cert-badge">Cloud ML</span>
+                            <span class="cert-badge">Vertex AI</span>
+                            <span class="cert-date-badge">GCP ML</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cert-bundle" onclick="toggleCert(this)">
+                <div class="cert-header">
+                    <div class="cert-header-left">
+                        <div class="cert-icon-compact">🚀</div>
+                        <div>
+                            <div class="cert-title-compact">NVIDIA Certified Associate - Generative AI and LLMs</div>
+                            <div class="cert-issuer-compact">NVIDIA</div>
+                        </div>
+                    </div>
+                    <div class="cert-expand-icon">
+                        <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                    </div>
+                </div>
+                <div class="cert-details">
+                    <div class="cert-details-content">
+                        <div class="cert-divider"></div>
+                        <p class="cert-description">Validates expertise in building and deploying generative AI applications using NVIDIA technologies. Covers large language models (LLMs), RAG pipelines, model fine-tuning, NVIDIA NeMo framework, and GPU-accelerated inference for production GenAI systems.</p>
+                        <div class="cert-meta">
+                            <span class="cert-badge">Generative AI</span>
+                            <span class="cert-badge">LLMs</span>
+                            <span class="cert-date-badge">NVIDIA NeMo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cert-bundle" onclick="toggleCert(this)">
+                <div class="cert-header">
+                    <div class="cert-header-left">
+                        <div class="cert-icon-compact">🔷</div>
+                        <div>
+                            <div class="cert-title-compact">Databricks Certified Data Engineer Associate</div>
+                            <div class="cert-issuer-compact">Databricks</div>
+                        </div>
+                    </div>
+                    <div class="cert-expand-icon">
+                        <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                    </div>
+                </div>
+                <div class="cert-details">
+                    <div class="cert-details-content">
+                        <div class="cert-divider"></div>
+                        <p class="cert-description">Validates expertise in building production-grade data pipelines, ETL processes, and data processing workflows on Databricks. Covers Spark, Delta Lake, data ingestion, transformation, and data quality.</p>
+                        <div class="cert-meta">
+                            <span class="cert-badge">Data Engineering</span>
+                            <span class="cert-badge">Apache Spark</span>
+                            <span class="cert-date-badge">ETL Pipelines</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cert-bundle" onclick="toggleCert(this)">
+                <div class="cert-header">
+                    <div class="cert-header-left">
+                        <div class="cert-icon-compact">⚡</div>
+                        <div>
+                            <div class="cert-title-compact">NVIDIA Certified Professional - Generative AI</div>
+                            <div class="cert-issuer-compact">NVIDIA</div>
+                        </div>
+                    </div>
+                    <div class="cert-expand-icon">
+                        <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                    </div>
+                </div>
+                <div class="cert-details">
+                    <div class="cert-details-content">
+                        <div class="cert-divider"></div>
+                        <p class="cert-description">Advanced certification demonstrating mastery in enterprise-grade generative AI solutions. Covers NVIDIA Triton Inference Server, TensorRT-LLM optimization, multi-GPU deployments, model serving at scale, and production GenAI infrastructure design for high-performance AI applications.</p>
+                        <div class="cert-meta">
+                            <span class="cert-badge">GenAI Pro</span>
+                            <span class="cert-badge">TensorRT-LLM</span>
+                            <span class="cert-date-badge">Production AI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="contact" id="contact">
         <div class="contact-content">
             <span class="section-tag">// Let's Connect</span>
@@ -405,7 +666,8 @@
                 }
             });
         }, observerOptions);
-        document.querySelectorAll('.skill-card, .timeline-content, .project-card, .edu-card, .working-card, .hero-stats').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(30px)'; el.style.transition = 'all 0.6s ease'; observer.observe(el); });
+        document.querySelectorAll('.skill-card, .timeline-content, .project-card, .edu-card, .working-card, .cert-bundle, .hero-stats').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(30px)'; el.style.transition = 'all 0.6s ease'; observer.observe(el); });
+        function toggleCert(element) { element.classList.toggle('active'); }
     </script>
 </body>
 </html>
