@@ -43,14 +43,14 @@ nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:2000;dis
 .eyebrow b{color:var(--gold2);font-weight:600}
 .caret{display:inline-block;width:2px;height:1em;background:var(--gold2);margin-left:2px;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-.name{font-size:clamp(.9rem,1.4vw,1.1rem);font-weight:600;color:var(--gold2);margin-bottom:14px;letter-spacing:.18em;text-transform:uppercase}
-.hero h1{font-size:clamp(2.6rem,8vw,7rem);font-weight:800;letter-spacing:-.045em;line-height:1.02;color:#fff;margin-bottom:26px}
+.hero h1{font-size:clamp(3.2rem,11vw,9.6rem);font-weight:800;letter-spacing:-.05em;line-height:.98;color:#fff;margin-bottom:22px}
+.tagline{font-size:clamp(1.05rem,2.1vw,1.7rem);font-weight:600;color:var(--gold2);letter-spacing:-.01em;margin-bottom:18px}
 .hero h1 .g{color:var(--gold2)}
 .hero h1 .ln{display:block;overflow:hidden;padding-bottom:.08em}
 .hero h1 .ln>span{display:inline-block;transform:translateY(110%);animation:up 1s cubic-bezier(.2,.8,.2,1) forwards}
 .hero h1 .ln:nth-child(2)>span{animation-delay:.15s}
 @keyframes up{to{transform:none}}
-.hero p.lead{font-size:clamp(1rem,1.4vw,1.18rem);color:#b9c9de;max-width:690px;margin:0 auto 34px;line-height:1.7}
+.hero p.lead{font-size:clamp(1rem,1.4vw,1.18rem);color:#b9c9de;max-width:690px;margin:0 auto 32px;line-height:1.7}
 .btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:8px;font-weight:600;font-size:.9rem;text-decoration:none;transition:transform .25s,background .25s,border-color .25s}
 .btn svg{width:16px;height:16px;fill:currentColor}
@@ -163,8 +163,8 @@ footer{background:#071326;color:#8196b3;text-align:center;padding:28px 20px;font
 footer b{color:var(--gold2);font-weight:600}
 
 /* CURSOR (restrained) */
-#cur{position:fixed;left:0;top:0;width:48px;height:30px;pointer-events:none;z-index:99999;will-change:transform;display:none}
-#cur img{position:absolute;left:0;width:44px;filter:drop-shadow(0 3px 4px rgba(0,0,0,.3))}
+#cur{position:fixed;left:0;top:0;width:38px;height:24px;pointer-events:none;z-index:99999;will-change:transform;display:none}
+#cur img{position:absolute;left:0;top:0;width:38px;filter:drop-shadow(0 3px 3px rgba(0,0,0,.35))}
 #fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:99998;display:none}
 @media (hover:hover) and (pointer:fine){
   body.money,body.money *{cursor:none!important}
@@ -217,8 +217,8 @@ footer b{color:var(--gold2);font-weight:600}
     </svg>
     <div class="hero-inner" id="heroInner">
       <div class="eyebrow"><b>Financial Analyst</b> <span style="opacity:.5">/</span> <span id="typed"></span><span class="caret"></span></div>
-      <p class="name">Nitish Kumar Manthri</p>
-      <h1><span class="ln"><span>Turning numbers</span></span><span class="ln"><span class="g">into decisions.</span></span></h1>
+      <h1><span class="ln"><span>Nitish Kumar</span></span><span class="ln"><span class="g">Manthri</span></span></h1>
+      <p class="tagline">Turning numbers into decisions.</p>
       <p class="lead">4+ years across FP&amp;A, financial reporting, budgeting, forecasting, financial modeling and investment analysis — in financial services and technology.</p>
       <div class="btns">
         <a href="#contact" class="btn pri">Get in touch</a>
@@ -465,7 +465,27 @@ footer b{color:var(--gold2);font-weight:600}
   const sprites=[bill(0),bill(1),bill(2)];
   document.body.classList.add('money');
   const cur=$('#cur');
-  [[0,6,-3],[1,0,0]].forEach(([s,top,rot])=>{const im=new Image();im.src=sprites[s].toDataURL();im.style.top=top+'px';im.style.transform=`rotate(${rot}deg)`;cur.appendChild(im)});
+  (function(){
+    const T=9,sk=(x,y)=>`${x},${y}`;
+    function bundle(dx,dy,shade){
+      const A=[10+dx,24+dy],D=[38+dx,40+dy],C=[124+dx,22+dy];
+      const P=(p,t=0)=>sk(p[0],p[1]+t);
+      const bx=f=>[D[0]+f*86,D[1]-f*18];
+      const b1=bx(.4),b2=bx(.56);
+      let s='';
+      // left + right sides (paper edges)
+      s+=`<polygon points="${P(A)} ${P(D)} ${P(D,T)} ${P(A,T)}" fill="${shade?'#9aa28f':'#a9b09e'}" stroke="#5f6b58" stroke-width=".8"/>`;
+      s+=`<polygon points="${P(D)} ${P(C)} ${P(C,T)} ${P(D,T)}" fill="${shade?'#7f8876':'#8c957f'}" stroke="#5f6b58" stroke-width=".8"/>`;
+      for(let i=1;i<4;i++){s+=`<line x1="${A[0]}" y1="${A[1]+i*2.2}" x2="${D[0]}" y2="${D[1]+i*2.2}" stroke="#5f6b58" stroke-opacity=".45" stroke-width=".6"/><line x1="${D[0]}" y1="${D[1]+i*2.2}" x2="${C[0]}" y2="${C[1]+i*2.2}" stroke="#4a5645" stroke-opacity=".45" stroke-width=".6"/>`}
+      // band on right side
+      s+=`<polygon points="${P(b1)} ${P(b2)} ${P(b2,T)} ${P(b1,T)}" fill="#f4f1e6"/><polygon points="${P(b1)} ${sk(b1[0]+2.4,b1[1]-.5)} ${sk(b1[0]+2.4,b1[1]-.5+T)} ${P(b1,T)}" fill="#e0a526"/><polygon points="${sk(b2[0]-2.4,b2[1]+.5)} ${P(b2)} ${P(b2,T)} ${sk(b2[0]-2.4,b2[1]+.5+T)}" fill="#e0a526"/>`;
+      // top face with $100 art
+      s+=`<g transform="matrix(.86 -.18 .7 .4 ${A[0]} ${A[1]})"><rect width="100" height="40" fill="#dfe3d2" stroke="#59695a" stroke-width="1.6"/><rect x="4" y="4" width="92" height="32" fill="none" stroke="#6f8470" stroke-width=".9"/><circle cx="26" cy="20" r="10" fill="none" stroke="#5a7a5c" stroke-width="1.4"/><circle cx="26" cy="20" r="5" fill="#7c9a7e" opacity=".55"/><text x="77" y="27" font-family="Georgia,serif" font-weight="700" font-size="20" fill="#4b6b4d" text-anchor="middle">100</text><rect x="40" y="-.5" width="16" height="41" fill="#f7f4ea"/><rect x="40" y="-.5" width="3" height="41" fill="#e0a526"/><rect x="53" y="-.5" width="3" height="41" fill="#e0a526"/></g>`;
+      return s;
+    }
+    const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 66"><ellipse cx="72" cy="58" rx="58" ry="6" fill="#000" opacity=".18"/>${bundle(8,18,1)}${bundle(0,4,0)}</svg>`;
+    const im=new Image();im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);cur.appendChild(im);
+  })();
   const cv=$('#fx'),cx=cv.getContext('2d');
   function fit(){const d=devicePixelRatio||1;cv.width=innerWidth*d;cv.height=innerHeight*d;cx.setTransform(d,0,0,d,0,0)}fit();addEventListener('resize',fit);
   let mx=-100,my=-100,lx=-100,ly=-100,acc=0,tilt=0,sc=1,tsc=1;const bills=[];
@@ -484,7 +504,7 @@ footer b{color:var(--gold2);font-weight:600}
   document.addEventListener('mouseover',e=>{tsc=e.target.closest('a,.btn,.s-card,.p-card,.stat,.tags span')?1.1:1});
   (function loop(){
     sc+=(tsc-sc)*.2;tilt*=.88;
-    cur.style.transform=`translate(${mx-10}px,${my-8}px) rotate(${tilt}deg) scale(${sc})`;
+    cur.style.transform=`translate(${mx-3}px,${my-5}px) rotate(${tilt*.5}deg) scale(${sc})`;
     cx.clearRect(0,0,innerWidth,innerHeight);
     for(let i=bills.length-1;i>=0;i--){
       const b=bills[i];b.age++;b.vy=Math.min(b.vy+.045,2.2);b.vx*=.985;
